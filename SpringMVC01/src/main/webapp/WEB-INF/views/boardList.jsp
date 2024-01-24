@@ -39,7 +39,7 @@
     		</c:forEach>
     	</table>
     </div>
-     <div class="panel-footer">스프링 연습</div>
+     <div class="panel-footer">스프링 연습_Yeong_Huns</div>
   </div>
 </div>
 

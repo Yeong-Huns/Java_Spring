@@ -34,7 +34,7 @@
     			<td>${vo.content}</td>
     			<td>${vo.writer}</td>
     			<td>${vo.indate}</td>
-    			<td>${vo.count}</td>
+    			<td>${vo.readCount}</td>
     		</tr>
     		</c:forEach>
     	</table>

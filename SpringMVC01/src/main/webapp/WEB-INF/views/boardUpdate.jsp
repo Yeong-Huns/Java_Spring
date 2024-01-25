@@ -18,7 +18,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">수정하기</div>
     <div class="panel-body">
-    	<form action="../boardUpdate.do" method="post">
+    	<form action="boardUpdate.do" method="post">
     	<input type="hidden" name="idx"value="${vo.idx}"/>
     	<table class="table">
     		<tr>
@@ -37,7 +37,7 @@
     			<td colspan="2" align="center">
     				<button type="submit" class="btn btn-sm btn-primary">수정</button>
     				<button type="reset" class="btn btn-sm btn-danger">취소</button>
-    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='../boardList.do'">목록</button>
+    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='boardList.do'">목록</button>
     			</td>
     		</tr>
     	</table>

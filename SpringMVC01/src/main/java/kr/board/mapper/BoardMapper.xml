@@ -6,4 +6,20 @@
     select * from Board order by idx desc;
   </select>
 
+  <insert id="boardInsert" parameterType="kr.board.entity.Board">
+  	INSERT INTO Board (title, content, writer) VALUES (#{title} ,#{content} ,#{writer})
+  </insert>
+
+	<select id="boardContent" resultType="kr.board.entity.Board">
+		select * from Board where idx=#{idx}
+	</select>
+	
+	<delete id="boardDelete">
+		delete from board where idx=#{idx}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="kr.board.entity.Board">
+		update board set title=#{title}, content=#{content} 
+		where idx=#{idx}
+	</update>
 </mapper>

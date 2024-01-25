@@ -16,29 +16,32 @@
 <div class="container">
   <h2>Spring mvc01</h2>
   <div class="panel panel-default">
-    <div class="panel-heading">BOARD</div>
+    <div class="panel-heading">수정하기</div>
     <div class="panel-body">
-    	<table class="table table-boarded table-hover">
+    	<form action="../boardUpdate.do" method="post">
+    	<input type="hidden" name="idx"value="${vo.idx}"/>
+    	<table class="table">
     		<tr>
-    			<td>번호</td>
     			<td>제목</td>
-    			<td>내용</td>
-    			<td>작성자</td>
-    			<td>작성일</td>
-    			<td>조회수</td>
+    			<td><input type="text" name="title" class="form-control" value="${vo.title}"></td>
     		</tr>
-    		<c:forEach var="vo" items="${list}">
     		<tr>
-    			<td>${vo.idx}</td>
-    			<td><a href="boardContent.do?idx=${vo.idx}">${vo.title}</a></td>
-    			<td>${vo.content}</td>
-    			<td>${vo.writer}</td>
-    			<td>${vo.indate}</td>
-    			<td>${vo.readCount}</td>
+    			<td>내용</td>
+    			<td><textarea rows="7" name="content" class="form-control">${vo.content}</textarea></td>
     		</tr>
-    		</c:forEach>
+    		<tr>
+    			<td>작성자</td>
+    			<td><input type="text" class="form-control" value="${vo.writer}" readonly="readonly"></td>
+    		</tr>
+    		<tr>
+    			<td colspan="2" align="center">
+    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
+    				<button type="reset" class="btn btn-sm btn-danger">취소</button>
+    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='../boardList.do'">목록</button>
+    			</td>
+    		</tr>
     	</table>
-    	<a href="boardForm.do" class="btn btn-primary btn-sm">글쓰기</a>
+    	</form>
     </div>
      <div class="panel-footer">스프링 연습_Yeong_Huns</div>
   </div>

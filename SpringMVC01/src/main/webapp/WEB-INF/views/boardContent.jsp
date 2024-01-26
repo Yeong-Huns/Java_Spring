@@ -39,9 +39,9 @@
     		</tr>
     		<tr>
     			<td colspan="2" align="center">
-    				<a href="boardUpdateForm.do?idx=${vo.idx}" class="btn btn-primary btn-sm">수정하기</a>&nbsp;&nbsp;
-    				<a href="boadDelete.do/${vo.idx}" class="btn btn-danger btn-sm">삭제</a>&nbsp;&nbsp;
-    				<a href="boardList.do" class="btn btn-info btn-sm">목록으로</a>
+    				<a href="boardUpdateForm.do?idx=${vo.idx}" class="btn btn-success btn-sm">수정하기</a>&nbsp;&nbsp;
+    				<a href="boadDelete.do/${vo.idx}" class="btn btn-warning btn-sm">삭제</a>&nbsp;&nbsp;
+    				<a href="boardList.do" class="btn btn-primary btn-sm">목록으로</a>
     			</td>
     		</tr>
     	</table>

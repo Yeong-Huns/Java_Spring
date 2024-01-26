@@ -35,9 +35,9 @@
     		</tr>
     		<tr>
     			<td colspan="2" align="center">
-    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
-    				<button type="reset" class="btn btn-sm btn-danger">취소</button>
-    				<button type="button" class="btn btn-sm btn-info" onclick="location.href='boardList.do'">목록</button>
+    				<button type="submit" class="btn btn-sm btn-success">수정하기</button>
+    				<button type="reset" class="btn btn-sm btn-warning">취소</button>
+    				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='boardList.do'">목록으로</button>
     			</td>
     		</tr>
     	</table>

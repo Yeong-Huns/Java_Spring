@@ -37,7 +37,7 @@
   		$.each(data, function(index,obj){
   			listHtml+="<tr>";
   	  		listHtml+="<td>"+obj.idx+"</td>";
-  	  		listHtml+="<td><a href='javascript:goContent("+obj.idx+")'>"+obj.title+"</a></td>";
+  	  		listHtml+="<td id='t"+obj.idx+"'><a href='javascript:goContent("+obj.idx+")'>"+obj.title+"</a></td>";
   	  		listHtml+="<td>"+obj.writer+"</td>";
   	  		listHtml+="<td>"+obj.indate+"</td>";
   	  		listHtml+="<td>"+obj.readCount+"</td>";
@@ -46,9 +46,9 @@
   	  		listHtml+="<tr style='display:none' id='c"+obj.idx+"'>";
   	  		listHtml+="<td>내용</td>";
   	  		listHtml+="<td colspan='4'>";
-  	  		listHtml+="<textarea rows='7' class='form-control' readonly>"+obj.content+"</textarea>";
+  	  		listHtml+="<textarea rows='7' class='form-control' readonly id='ta"+obj.idx+"'>"+obj.content+"</textarea>";
 	  	  	listHtml+="<br/>";
-	  		listHtml+="<button class='btn btn-primary btn-sm'>수정하기</button>&nbsp;";
+	  		listHtml+="<span id='up"+obj.idx+"'><button class='btn btn-primary btn-sm' onclick='goUpdateForm("+obj.idx+")'>수정하기</button></span>&nbsp;";
 	  		listHtml+="<button class='btn btn-danger btn-sm' onclick='goDelete("+obj.idx+")'>삭제하기</button>";
   	  		listHtml+="</td>";
   	  		listHtml+="</tr>";
@@ -93,6 +93,7 @@
   	function goContent(idx){
   		if($("#c"+idx).css("display")=="none"){
   			$("#c"+idx).css("display", "table-row");	
+  			$("#ta"+idx).attr("readonly",true);
   		}else{
   			$("#c"+idx).css("display", "none");
   		}
@@ -106,7 +107,15 @@
   			error: function(){alert("error");}
   		});
   	}
-  	
+  	function goUpdateForm(idx){ //idx 
+  		$("#ta"+idx).attr("readonly", false); // attr = attribute
+  		var title= $("#t"+idx).text();
+  		var newInput="<input type='text' class='form-control' value='"+title+"' name=''/>";
+  		$("#t"+idx).html(newInput);
+  		
+  		var newButton = "<button class='btn btn-sm btn-success'>수정완료</button>"
+  		$("#up"+idx).html(newButton);
+  	}
   </script>
 </head>
 <body>

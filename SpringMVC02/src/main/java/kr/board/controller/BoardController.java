@@ -37,4 +37,8 @@ public class BoardController {
 	public @ResponseBody void boardDelete(@RequestParam("idx") int idx) {
 		mapper.boardDelete(idx);
 	}
+	@RequestMapping("boardUpdate.do")
+	public @ResponseBody void boardUpdate(Board vo) {
+		mapper.boardUpdate(vo);
+	}
 }

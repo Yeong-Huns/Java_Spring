@@ -110,11 +110,22 @@
   	function goUpdateForm(idx){ //idx 
   		$("#ta"+idx).attr("readonly", false); // attr = attribute
   		var title= $("#t"+idx).text();
-  		var newInput="<input type='text' class='form-control' value='"+title+"' name=''/>";
+  		var newInput="<input id='nt"+idx+"' type='text' class='form-control' value='"+title+"' name=''/>";
   		$("#t"+idx).html(newInput);
   		
-  		var newButton = "<button class='btn btn-sm btn-success'>수정완료</button>"
+  		var newButton = "<button class='btn btn-sm btn-success' onclick='goUpdate("+idx+")'>수정완료</button>"
   		$("#up"+idx).html(newButton);
+  	}
+  	function goUpdate(idx){
+  		var title = $("#nt"+idx).val();
+  		var content = $("#ta"+idx).val();
+  		$.ajax({
+  			url: "boardUpdate.do",
+  			type: "post",
+  			data: {"idx":idx, "title":title, "content":content},
+  			success: loadList,
+  			error: function(){ alert("error"); }
+  		});
   	}
   </script>
 </head>

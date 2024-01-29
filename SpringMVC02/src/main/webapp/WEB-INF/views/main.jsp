@@ -17,7 +17,7 @@
   	});
   	function loadList(){
   		$.ajax({
-  			url: "boardList.do",
+  			url: "board/all",
   			type: "get",
   			dataType: "json",
   			success: makeView,
@@ -39,7 +39,7 @@
   	  		listHtml+="<td>"+obj.idx+"</td>";
   	  		listHtml+="<td id='t"+obj.idx+"'><a href='javascript:goContent("+obj.idx+")'>"+obj.title+"</a></td>";
   	  		listHtml+="<td>"+obj.writer+"</td>";
-  	  		listHtml+="<td>"+obj.indate+"</td>";
+  	  		listHtml+="<td>"+obj.indate.split(" ")[0]+"</td>";
   	  		listHtml+="<td id='cnt"+obj.idx+"'>"+obj.readCount+"</td>";
   	  		listHtml+="</tr>";
   	  		
@@ -79,7 +79,7 @@
   		var fData=$("#frm").serialize(); //자동으로 forme데이타를 자동으로 가져옴
   		//alert(fData);
   		$.ajax({
-  			url: "boardInsert.do",
+  			url: "board/new",
   			type: "post",
   			data: fData,
   			success: loadList,
@@ -93,8 +93,8 @@
   	function goContent(idx){
   		if($("#c"+idx).css("display")=="none"){
   			$.ajax({
-  				url: "boardCount.do",
-  				type: "get",
+  				url: "board/count/"+idx,
+  				type: "put",
   				data: {"idx" : idx},
   				dataType: "json",
   				success: function(data){
@@ -103,7 +103,7 @@
   				error: function(){ alert("error"); }
   			});
   			$.ajax({
-  				url: "boardContent.do",
+  				url: "board/"+idx,
   				type: "get",
   				data: {"idx": idx},
   				dataType: "json",
@@ -120,8 +120,8 @@
   	}
   	function goDelete(idx){
   		$.ajax({
-  			url: "boardDelete.do",
-  			type: "get",
+  			url: "board/"+idx,
+  			type: "delete",
   			data: {"idx":idx},
   			success: loadList,
   			error: function(){alert("error");}
@@ -133,16 +133,18 @@
   		var newInput="<input id='nt"+idx+"' type='text' class='form-control' value='"+title+"' name=''/>";
   		$("#t"+idx).html(newInput);
   		
-  		var newButton = "<button class='btn btn-sm btn-success' onclick='goUpdate("+idx+")'>수정완료</button>"
+  		var newButton = "<button class='btn btn-sm btn-success' onclick='goUpdate("+idx+")'>수정완료</button>";
+  		newButton += "&nbsp;<button class='btn btn-sm btn-basic' onclick='loadList()'>목록으로</button>";
   		$("#up"+idx).html(newButton);
   	}
   	function goUpdate(idx){
   		var title = $("#nt"+idx).val();
   		var content = $("#ta"+idx).val();
   		$.ajax({
-  			url: "boardUpdate.do",
-  			type: "post",
-  			data: {"idx":idx, "title":title, "content":content},
+  			url: "board/update",
+  			type: "put",
+  			contentType: 'application/json;charset=utf-8',
+  			data: JSON.stringify({"idx":idx, "title":title, "content":content}),
   			success: loadList,
   			error: function(){ alert("error"); }
   		});

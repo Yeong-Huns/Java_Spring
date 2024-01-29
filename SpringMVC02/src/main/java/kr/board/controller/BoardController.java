@@ -17,39 +17,11 @@ import kr.board.mapper.BoardMapper;
 
 @Controller
 public class BoardController {
-	@Autowired
-	private BoardMapper mapper;
+	
 	
 	@RequestMapping("/")
 	public String home() {
 		return "main";
 	}
-	@RequestMapping("boardList.do")
-	public @ResponseBody List<Board> boardList(){
-		List<Board> list = mapper.getLists();
-		return list;
-	}
-	@RequestMapping("boardInsert.do")
-	public @ResponseBody void boardInsert(Board vo) {
-		mapper.boardInsert(vo);
-	}
-	@RequestMapping("boardDelete.do")
-	public @ResponseBody void boardDelete(@RequestParam("idx") int idx) {
-		mapper.boardDelete(idx);
-	}
-	@RequestMapping("boardUpdate.do")
-	public @ResponseBody void boardUpdate(Board vo) {
-		mapper.boardUpdate(vo);
-	}
-	@RequestMapping("boardContent.do")
-	public @ResponseBody Board boardContent(@RequestParam("idx") int idx) {
-		Board vo = mapper.boardContent(idx);
-		return vo;
-	}  
-	@RequestMapping("boardCount.do")
-	public @ResponseBody Board boardCount(@RequestParam("idx") int idx) {
-		mapper.boardCount(idx);
-		Board vo = mapper.boardContent(idx);
-		return vo;
-	}
+	
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.board.entity.Board;
@@ -31,5 +32,9 @@ public class BoardController {
 	@RequestMapping("boardInsert.do")
 	public @ResponseBody void boardInsert(Board vo) {
 		mapper.boardInsert(vo);
+	}
+	@RequestMapping("boardDelete.do")
+	public @ResponseBody void boardDelete(@RequestParam("idx") int idx) {
+		mapper.boardDelete(idx);
 	}
 }

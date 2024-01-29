@@ -40,13 +40,13 @@
   	  		listHtml+="<td id='t"+obj.idx+"'><a href='javascript:goContent("+obj.idx+")'>"+obj.title+"</a></td>";
   	  		listHtml+="<td>"+obj.writer+"</td>";
   	  		listHtml+="<td>"+obj.indate+"</td>";
-  	  		listHtml+="<td>"+obj.readCount+"</td>";
+  	  		listHtml+="<td id='cnt"+obj.idx+"'>"+obj.readCount+"</td>";
   	  		listHtml+="</tr>";
   	  		
   	  		listHtml+="<tr style='display:none' id='c"+obj.idx+"'>";
   	  		listHtml+="<td>내용</td>";
   	  		listHtml+="<td colspan='4'>";
-  	  		listHtml+="<textarea rows='7' class='form-control' readonly id='ta"+obj.idx+"'>"+obj.content+"</textarea>";
+  	  		listHtml+="<textarea rows='7' class='form-control' readonly id='ta"+obj.idx+"'></textarea>";
 	  	  	listHtml+="<br/>";
 	  		listHtml+="<span id='up"+obj.idx+"'><button class='btn btn-primary btn-sm' onclick='goUpdateForm("+obj.idx+")'>수정하기</button></span>&nbsp;";
 	  		listHtml+="<button class='btn btn-danger btn-sm' onclick='goDelete("+obj.idx+")'>삭제하기</button>";
@@ -92,6 +92,26 @@
   	}
   	function goContent(idx){
   		if($("#c"+idx).css("display")=="none"){
+  			$.ajax({
+  				url: "boardCount.do",
+  				type: "get",
+  				data: {"idx" : idx},
+  				dataType: "json",
+  				success: function(data){
+  					$("#cnt"+idx).text(data.readCount);
+  				},
+  				error: function(){ alert("error"); }
+  			});
+  			$.ajax({
+  				url: "boardContent.do",
+  				type: "get",
+  				data: {"idx": idx},
+  				dataType: "json",
+  				success: function(data){
+  					$("#ta"+idx).val(data.content)
+  				},
+  				error: function(){ alert("error"); }
+  			});
   			$("#c"+idx).css("display", "table-row");	
   			$("#ta"+idx).attr("readonly",true);
   		}else{

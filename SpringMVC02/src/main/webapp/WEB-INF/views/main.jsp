@@ -76,7 +76,7 @@
   		//var content = $("#content").val();
   		//var writer = $("#writer").val();
   		
-  		var fData=$("#frm").serialize(); //자동으로 forme데이타를 자동으로 가져옴
+  		var fData=$("#frm").serialize(); //자동으로 form데이타를 자동으로 가져옴
   		//alert(fData);
   		$.ajax({
   			url: "board/new",

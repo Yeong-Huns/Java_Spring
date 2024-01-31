@@ -11,8 +11,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"/>
 <div class="container">
+<jsp:include page="../common/header.jsp"/>
   <h3>SpringMVC03</h3>
   <p>Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요.
   <p>Spring MVC03</p>

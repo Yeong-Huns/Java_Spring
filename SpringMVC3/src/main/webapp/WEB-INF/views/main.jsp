@@ -40,15 +40,15 @@
   			listHtml+="<td id='t"+obj.idx+"'><a href='javascript:goContent("+obj.idx+")'>"+obj.title+"</a></td>";
   			listHtml+="<td>"+obj.writer+"</td>";
   			listHtml+="<td>"+obj.indate.split(" ")[0]+"</td>";
-  			listHtml+="<td>"+obj.readCount+"</td>";
+  			listHtml+="<td id='cnt"+obj.idx+"'>"+obj.readCount+"</td>";
   			listHtml+="</tr>";
   			
   			listHtml+="<tr id='contentview"+obj.idx+"'style='display:none'>"
   			listHtml+="<td>내용</td>"
   			listHtml+="<td colspan='4'>"
-  			listHtml+="<textarea rows='7' class='form-control'></textarea>"
+  			listHtml+="<textarea rows='7' class='form-control' id='up"+obj.idx+"'></textarea>"
 			listHtml+="<br/>"  			
-  			listHtml+="<button class='btn btn-primary btn-sm'>수정하기</button>&nbsp;"
+  			listHtml+="<span id='sp"+obj.idx+"'><button class='btn btn-primary btn-sm' onclick='updateForm("+obj.idx+")'>수정하기</button></span>&nbsp;"
   			listHtml+="<button class='btn btn-danger btn-sm' onclick='goDelete("+obj.idx+")'>삭제하기</button>"
   			listHtml+="</td>"
   			listHtml+="</tr>"
@@ -65,11 +65,30 @@
   	}
   	function goContent(idx){
   		if( $("#contentview"+idx).css("display")=="none" ){
+  			$.ajax({
+  				url: "board/"+idx,
+  				type: "put",
+  				data: {"idx": idx},
+  				dataType: "json",
+  				success: function(data){
+  					$("#cnt"+idx).text(data.readCount)
+  				},
+  				error: function(){ alert("조회수 증가 ERROR!"); }
+  			});
+  			$.ajax({
+  				url: "board/"+idx,
+  				type: "get",
+  				data: {"idx": idx},
+  				dataType: "json",
+  				success: function(data){
+  					$("#up"+idx).val(data.content)
+  				},
+  				error: function(){ alert("getContent 에러!"); }
+  			});
   			$("#contentview"+idx).css("display","table-row");
-  			console.log("보여주기"+idx)
+  			$("#up"+idx).attr("readonly", true);
   		}else{
   			$("#contentview"+idx).css("display","none");
-  			console.log("감추기"+idx)
   		}
   	}
   	function goform(){
@@ -100,6 +119,29 @@
   			error: function(){ alert("Delete 에러!"); }
   		});
   	}
+  	function updateForm(idx){
+  		$("#up"+idx).attr("readonly", false)
+  		var title = $("#t"+idx).text();
+  		var newInput = "<input id='nt"+idx+"' type='text' class='form-control' value='"+title+"'>"
+  		$("#t"+idx).html(newInput);
+  		var addHtml = "<button class='btn btn-success btn-sm' onclick='goUpdate("+idx+")'>수정완료</button>&nbsp;"
+  		addHtml+="<button class='btn btn-warning btn-sm' onclick='loadList()'>목록으로</button>&nbsp;"
+  		$("#sp"+idx).html(addHtml);
+  	}
+  	function goUpdate(idx){
+  		var title = $("#nt"+idx).val();
+  		var content = $("#up"+idx).val();
+  		console.log("title"+idx)
+  		console.log("content"+idx)
+  		$.ajax({
+  			url: "board/update",
+  			type: "put",
+  			contentType: 'application/json;charset=utf-8',
+  			data: JSON.stringify({'idx': idx, 'title': title, 'content': content}),
+  			success: loadList,
+  			error: function(){alert("글 수정 오류!!")}
+  		});
+  	}
   </script>
 </head>
 <body>
@@ -118,7 +160,7 @@
     		</tr>
     		<tr>
     			<td>내용</td>
-    			<td><textarea rows='7' class='form-control' id='content' name='content' ></textarea></td>
+    			<td><textarea rows='7' class='form-control' id='content' name='content'></textarea></td>
     		</tr>
     		<tr>
     			<td>작성자</td>
@@ -126,8 +168,8 @@
     		</tr>
     	<tr>
     		<td colspan='2' align='center'>
-    			<button type="button" class='btn btn-success btn-sm' onclick="goInsert()">등록</button>&nbsp;
-    			<button type="reset" class='btn btn-warning btn-sm' id="formClear">취소</button>&nbsp;
+    			<button type="button" class='btn btn-success btn-sm' onclick="goInsert()">등록</button>
+    			<button type="reset" class='btn btn-warning btn-sm' id="formClear">취소</button>
     			<button class ='btn btn-primary btn-sm' onclick='goList()'>목록으로</button>
     		</td>
     	</tr>

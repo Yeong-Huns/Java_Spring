@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,32 +37,20 @@ public class BoardRestController {
 		public void boadDelete(@PathVariable("idx") int idx) {
 			mapper.boardDelete(idx);
 		}
-		
-		@GetMapping("/boardForm.do")
-		public String boardFrom() {
-			return "boardForm"; //WEB-INF/vies/ + boardForm.jsp;
-		}
-		@GetMapping("/boardContent.do")
-		public String boardContent(@RequestParam("idx") int idx, Model model) { // ex)idx=6
+		@GetMapping("/{idx}")
+		public Board getContent(@PathVariable("idx") int idx) {
 			Board vo = mapper.boardContent(idx);
-			//조회수 증가 처리
+			return vo;
+		}
+		@PutMapping("/{idx}")
+		public Board updateReadCount(@PathVariable("idx") int idx) {
 			mapper.boardCount(idx);
-			model.addAttribute("vo", vo);
-			return "boardContent";
-		}
-		
-		
-		@GetMapping("boardUpdateForm.do")
-		public String boardUpdateForm(@RequestParam("idx") int idx, Model model) {
 			Board vo = mapper.boardContent(idx);
-			model.addAttribute("vo", vo);
-			return "boardUpdate"; 
+			return vo;
+		}
+		@PutMapping("/update")
+		public void updateBoard(@RequestBody Board vo) {
+			mapper.boardUpdate(vo);
 		}
 		
-		@PostMapping("boardUpdate.do")
-		public String boardUpdate(Board vo) {
-			mapper.boardUpdate(vo); // 수정
-			return "redirect:/boardList.do";
-		}
-	
 }

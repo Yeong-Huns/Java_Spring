@@ -38,7 +38,7 @@ public class BoardRestController {
 			mapper.boardDelete(idx);
 		}
 		@GetMapping("/{idx}")
-		public Board getContent(@PathVariable("idx") int idx) {
+		public Board getContent(@PathVariable("idx") int idx) { 
 			Board vo = mapper.boardContent(idx);
 			return vo;
 		}
@@ -50,7 +50,7 @@ public class BoardRestController {
 		}
 		@PutMapping("/update")
 		public void updateBoard(@RequestBody Board vo) {
-			mapper.boardUpdate(vo);
+			mapper.boardUpdate (vo);
 		}
 		
 }

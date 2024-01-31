@@ -34,11 +34,11 @@
        <c:if test="${!empty mvo}">
       <ul class="nav navbar-nav navbar-right"> <!-- 오른쪽 정렬될 탭 -->
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 접속하기 <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 회원관리 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">회원정보수정</a></li>
             <li><a href="#">사진 등록</a></li>
-            <li><a href="#">로그아웃</a></li>
+            <li><a href="${contextPath}/memLogout.do">로그아웃</a></li>
           </ul>
         </li>
       </ul>

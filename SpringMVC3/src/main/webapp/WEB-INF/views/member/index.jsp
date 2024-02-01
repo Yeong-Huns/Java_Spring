@@ -27,7 +27,7 @@
   <h3>비회원_메인메뉴</h3>
   </c:if>
   <c:if test="${!empty mvo}">
-  <h3>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</h3>
+  <h3>[사진위치]Welcome! ${mvo.memName}, 다시 만나서 반가워요.</h3>
   </c:if>
  <div class="panel panel-default">
     <div>

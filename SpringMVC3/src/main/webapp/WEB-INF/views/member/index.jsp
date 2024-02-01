@@ -27,7 +27,13 @@
   <h3>비회원_메인메뉴</h3>
   </c:if>
   <c:if test="${!empty mvo}">
-  <h3>[사진위치]Welcome! ${mvo.memName}, 다시 만나서 반가워요.</h3>
+  <c:if test="${mvo.memProfile eq ''}">
+  	<img src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/>
+  </c:if>
+  <c:if test="${mvo.memProfile ne ''}">
+  	<img src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/>
+  </c:if>
+  <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.<label>
   </c:if>
  <div class="panel panel-default">
     <div>

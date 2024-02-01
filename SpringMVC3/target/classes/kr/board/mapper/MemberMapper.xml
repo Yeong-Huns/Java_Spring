@@ -17,4 +17,10 @@
 		UPDATE MEMBER SET memPwd=#{memPwd}, memName=#{memName}, memAge=#{memAge}, memGender=#{memGender}, 
 		memEmail=#{memEmail} WHERE memId=#{memId}
 	</update>
+	<select id="getMember" resultType="kr.board.entity.Member">
+		select * from MEMBER WHERE memId=#{memId}
+	</select>
+	<update id="memProfileUpdate" parameterType="kr.board.entity.Member">
+		update Member set memProfile=#{memProfile} where memId=#{memId}
+	</update>
 </mapper>

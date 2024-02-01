@@ -40,7 +40,7 @@
     				<td style="width:110px; vertical-align:middle">사진업로드</td>
     				<td colspan="2">
     				<span class="btn btn-sm btn-default">
-    				이미지를 업로드하세요.<input type="file" name="memprofile"/>
+    				이미지를 업로드하세요.<input type="file" name="memProfile"/>
     				</span>
     				</td>
     			</tr>

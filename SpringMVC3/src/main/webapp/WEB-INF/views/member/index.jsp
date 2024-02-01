@@ -33,7 +33,7 @@
   <c:if test="${mvo.memProfile ne ''}">
   	<img src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/>
   </c:if>
-  <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.<label>
+  <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</label>
   </c:if>
  <div class="panel panel-default">
     <div>

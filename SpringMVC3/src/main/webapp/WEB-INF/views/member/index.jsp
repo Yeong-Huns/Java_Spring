@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>spring-mvc03</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,7 +23,12 @@
 <body>
 <div class="container">
 <jsp:include page="../common/header.jsp"/>
-  <h3>SpringMVC03</h3>
+  <c:if test="${empty mvo}">
+  <h3>비회원_메인메뉴</h3>
+  </c:if>
+  <c:if test="${!empty mvo}">
+  <h3>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</h3>
+  </c:if>
   <p>Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요.
   <p>Spring MVC03</p>
 </div>

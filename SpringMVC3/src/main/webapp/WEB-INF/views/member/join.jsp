@@ -48,7 +48,7 @@
 	}else{
 		$("#PwdMessage").css("color", "blue")
 		$("#PwdMessage").html("비밀번호가 서로 일치합니다.");
-		$("#memPwd").val("Pwd1");
+		$("#memPwd").val(Pwd1);
   }
   }
   function goInsert(){
@@ -141,27 +141,27 @@
 
 </div>
 
-<!-- 실패 메세지 출력(modal) -->
-<!-- 다이얼 로그 창(모달) -->
-    <!-- Modal -->
-<div id="myMessage" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div id="messageType" class="modal-content panel-info">
-      <div class="modal-header panel-heading">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">${msgType}</h4>
-      </div>
-      <div class="modal-body">
-        <p>${msg}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-	<!-- content END -->
-  </div>
+	<!-- 실패 메세지 출력(modal) -->
+	<!-- 다이얼 로그 창(모달) -->
+	    <!-- Modal -->
+	<div id="myMessage" class="modal fade" role="dialog">
+	  
+	  <div class="modal-dialog">
+	    <!-- Modal content-->
+	    <div id="messageType" class="modal-content panel-info">
+	      <div class="modal-header panel-heading">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">${msgType}</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>${msg}</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+		<!-- content END -->
+	  </div>
 
 </div>
      <div class="panel-footer">Yeong_Huns_SpringMVC03</div>

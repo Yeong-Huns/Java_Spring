@@ -25,7 +25,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 접속하기 <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> &nbsp;로그인</a></li>
+            <li><a href="${contextPath}/memLoginForm.do"><span class="glyphicon glyphicon-log-in"></span> &nbsp;로그인</a></li>
             <li><a href="${contextPath}/memJoin.do"><span class="glyphicon glyphicon-user"></span> &nbsp;회원가입</a></li>
           </ul>
         </li>

@@ -29,10 +29,37 @@
   <c:if test="${!empty mvo}">
   <h3>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</h3>
   </c:if>
-  <p>Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요. Nav_Bar 테스트입니다. 크기를 조절해보세요.
-  <p>Spring MVC03</p>
+ <div class="panel panel-default">
+    <div>
+    	<img src="${contextPath}/resources/images/mainImage.jpg" style="width: 100%; height: 500px;"/>
+    </div>
+    <div class="panel-body">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">게시판</a></li>
+    <li><a data-toggle="tab" href="#menu2">공지사항</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>main_content</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>게시판</h3>
+      <p>게시판_content</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>공지사항</h3>
+      <p>공지사항_content</p>
+    </div>
+  </div>
+    </div>
+     <div class="panel-footer">
+     스프링 연습_Yeong_Huns
+     </div>
+   </div>
 </div>
- 
  
  <!-- 성공 메세지 출력(modal) -->
 <!-- 다이얼 로그 창(모달) -->

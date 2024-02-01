@@ -95,6 +95,9 @@ public class MemberController {
 			return "redirect:/memLoginForm.do";
 			}
 		}
-	
+	@RequestMapping("/memUpdateForm.do")
+	public String memUpdateForm() {
+		return "member/memUpdateForm";
+	}
 	}
 

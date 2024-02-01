@@ -23,22 +23,25 @@
 <body>
 <div class="container">
 <jsp:include page="../common/header.jsp"/>
-  <c:if test="${empty mvo}">
-  <h3>비회원_메인메뉴</h3>
-  </c:if>
-  <c:if test="${!empty mvo}">
-  <c:if test="${mvo.memProfile eq ''}">
-  	<img src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/>
-  </c:if>
-  <c:if test="${mvo.memProfile ne ''}">
-  	<img src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/>
-  </c:if>
-  <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</label>
-  </c:if>
+  
  <div class="panel panel-default">
     <div>
     	<img src="${contextPath}/resources/images/mainImage.jpg" style="width: 100%; height: 500px;"/>
     </div>
+    <div class="panel-heading">
+    <c:if test="${empty mvo}">
+  <label><span class="glyphicon glyphicon-exclamation-sign"></span> &nbsp;비회원 상태에선 기능이 제한됩니다.</label>
+  </c:if>
+  <c:if test="${!empty mvo}">
+  <c:if test="${mvo.memProfile eq ''}">
+  	<img class="img-circle" src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/>
+  </c:if>
+  <c:if test="${mvo.memProfile ne ''}">
+  	<img class="img-circle" src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/>
+  </c:if>
+  <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</label>
+  </c:if>
+  </div>
     <div class="panel-body">
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>

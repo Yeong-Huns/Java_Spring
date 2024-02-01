@@ -161,7 +161,7 @@ public class MemberController {
 		//데이터베이스 테이블에 회원이미지를 업데이트
 		String memId = multi.getParameter("memId");
 		String newProfile="";
-		File file = multi.getFile("memProfile");
+		File file = multi.getFile("memProfile"); //memImageForm 에서 #memProfile로 넘어온 파일은 내가 업로드한 그 파일이다.
 		if(file == null) System.out.println("nothing");
 		if(file != null) { // 업로드가 된 상태 (.png, .jpg, .gif) 
 			//이미지 파일 여부를 체크 -> 이미지 파일이 아니면 삭제(1.png)

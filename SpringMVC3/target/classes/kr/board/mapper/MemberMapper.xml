@@ -13,4 +13,8 @@
 	<select id="memLogin" parameterType="kr.board.entity.Member" resultType="kr.board.entity.Member">
 		select * from Member where memId=#{memId} and memPwd=#{memPwd}
 	</select>
+	<update id="memUpdate" parameterType="kr.board.entity.Member">
+		UPDATE MEMBER SET memPwd=#{memPwd}, memName=#{memName}, memAge=#{memAge}, memGender=#{memGender}, 
+		memEmail=#{memEmail} WHERE memId=#{memId}
+	</update>
 </mapper>

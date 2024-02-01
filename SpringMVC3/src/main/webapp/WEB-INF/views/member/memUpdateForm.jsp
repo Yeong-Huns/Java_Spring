@@ -48,7 +48,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">회원정보수정</div>
     <div class="panel-body">
-    	<form method="post" action="${contextPath}/memUpdate.do" >
+    	<form method="post" action="${contextPath}/memUpdate.do" name="frm">
     	<input type="hidden" name="memPwd" id="memPwd" value=""/>
     	<input type="hidden" name="memId" id="memId" value="${mvo.memId}"/>
     		<table class="table table-bordered" style="text-align: center; border: 1px solid #dddddd;">
@@ -100,29 +100,6 @@
     		</table>
     	</form>
     </div>
-    <!-- 다이얼 로그 창(모달) -->
-    <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div id="checkType" class="modal-content panel-info">
-      <div class="modal-header panel-heading">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">메세지 확인</h4>
-      </div>
-      <div class="modal-body">
-        <p id="checkMessage"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-	<!-- content END -->
-  </div>
-
-</div>
-
 	<!-- 실패 메세지 출력(modal) -->
 	<!-- 다이얼 로그 창(모달) -->
 	    <!-- Modal -->

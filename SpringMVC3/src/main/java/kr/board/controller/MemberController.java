@@ -51,7 +51,7 @@ public class MemberController {
 		}
 		m.setMemProfile(""); // 사진이 없는 상태(default)값을 ""로 지정 / 설정하지 않으면 null 값이 들어감
 		//회원을 테이블에 저장
-		int result = mapper.register(m);
+		int result = mapper.register(m); 
 		if(result==1) { //회원가입 성공 메세지
 			rdAb.addFlashAttribute("msgType", "회원가입 성공!");
 			rdAb.addFlashAttribute("msg", "가입되셨습니다.");
@@ -98,6 +98,39 @@ public class MemberController {
 	@RequestMapping("/memUpdateForm.do")
 	public String memUpdateForm() {
 		return "member/memUpdateForm";
+	}
+	@RequestMapping("/memUpdate.do")
+	public String memUpdate(Member m, RedirectAttributes rdAb, 
+			String memPwd1, String memPwd2, HttpSession session) {
+		if(m.getMemId()==null || m.getMemId().equals("") ||
+				   memPwd1==null || memPwd1.equals("") ||
+				   memPwd2==null || memPwd2.equals("") ||
+				   m.getMemName()==null || m.getMemName().equals("") ||
+				   m.getMemAge()==0 ||
+				   m.getMemGender()==null || m.getMemGender().equals("") ||
+				   m.getMemEmail()==null || m.getMemEmail().equals("")) {
+					// redirect시 객체 바인딩을 하는 방법? RedirectAttributes
+					rdAb.addFlashAttribute("msgType", "누락 메세지");
+					rdAb.addFlashAttribute("msg", "모든 내용을 입력하세요.");
+					return "redirect:/memUpdateForm.do"; //${msgType}, ${msg} ... memJoin.jsp로 이동후에도 EL 태그로 값을 받을수 있다.
+				}
+				if(!memPwd1.equals(memPwd2)) {
+					rdAb.addFlashAttribute("msgType", "실패 메세지");
+					rdAb.addFlashAttribute("msg", "비밀번호가 서로 다릅니다.");
+					return "redirect:/memUpdateForm.do"; // ${msgType}, ${msg}
+				}
+				int result = mapper.memUpdate(m); 
+				if(result==1) { //회원가입 성공 메세지
+					rdAb.addFlashAttribute("msgType", "수정완료");
+					rdAb.addFlashAttribute("msg", "회원정보수정이 완료되었습다");
+					//회원가입이 성공하면 로그인 처리
+					session.setAttribute("mvo", m); // ${!empty m} == 로그인 
+					return "redirect:/";
+				}else {
+					rdAb.addFlashAttribute("msgType", "오류!");
+					rdAb.addFlashAttribute("msg", "회원 정보 수정에 실패하였습니다.");
+					return "redirect:/memUpdateForm.do";
+				}
 	}
 	}
 

@@ -48,16 +48,29 @@
   			listHtml+="<td colspan='4'>"
   			listHtml+="<textarea rows='7' class='form-control' id='up"+obj.idx+"'></textarea>"
 			listHtml+="<br/>"  			
+			if("${mvo.memId}"==obj.writer){
   			listHtml+="<span id='sp"+obj.idx+"'><button class='btn btn-primary btn-sm' onclick='updateForm("+obj.idx+")'>수정하기</button></span>&nbsp;"
   			listHtml+="<button class='btn btn-danger btn-sm' onclick='goDelete("+obj.idx+")'>삭제하기</button>"
+			}
   			listHtml+="</td>"
   			listHtml+="</tr>"
   		});
+  		//로그인을 해야 볼수있도록 해야함 (session = "mvo")
+  		if(${!empty mvo}){
   		listHtml+="<tr>";
   		listHtml+="<td colspan='5'>";
   		listHtml+="<button class='btn btn-primary btn-sm' onclick='goform()'>글쓰기</button>"
   		listHtml+="</td>";
   		listHtml+="</tr>";
+  		}
+  		if(${empty mvo}){
+  			listHtml+="<tr>";
+  	  		listHtml+="<td colspan='5'>";
+  	  		listHtml+="<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;비회원 상태에선 기능이 제한됩니다."
+  	  		listHtml+="</td>";
+  	  		listHtml+="</tr>";
+  		}
+  		//
   		listHtml+="</table>";	
   		$("#views").html(listHtml);
   		$("#wform").css("display", "none");
@@ -147,7 +160,7 @@
 <body>
 <div class="container">
 <jsp:include page="../common/header.jsp"/>
-  <h2>Spring mvc03</h2>
+  <h2>회원게시판</h2>
   <div class="panel panel-default">
     <div class="panel-heading">BOARD</div>
     <div class="panel-body" id="views"></div>
@@ -164,7 +177,7 @@
     		</tr>
     		<tr>
     			<td>작성자</td>
-    			<td><input type='text' class='form-control' id='writer' name='writer' ></td>
+    			<td><input type='text' class='form-control' id='writer' name='writer' value='${mvo.memId}' readonly></td>
     		</tr>
     	<tr>
     		<td colspan='2' align='center'>

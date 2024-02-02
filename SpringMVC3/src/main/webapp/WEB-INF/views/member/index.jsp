@@ -33,12 +33,6 @@
   <label><span class="glyphicon glyphicon-exclamation-sign"></span> &nbsp;비회원 상태에선 기능이 제한됩니다.</label>
   </c:if>
   <c:if test="${!empty mvo}">
-  <c:if test="${mvo.memProfile eq ''}">
-  	<img class="img-circle" src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/>
-  </c:if>
-  <c:if test="${mvo.memProfile ne ''}">
-  	<img class="img-circle" src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/>
-  </c:if>
   <label>Welcome! ${mvo.memName}, 다시 만나서 반가워요.</label>
   </c:if>
   </div>

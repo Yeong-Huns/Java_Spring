@@ -16,7 +16,6 @@
     <div class="collapse navbar-collapse" id="myNavbar"> <!-- myNavbar를 누르기 전까지 닫혀져있겠다는 뜻-->
       <ul class="nav navbar-nav">
         <li class="active"><a href="${contextPath}">Home</a></li> <!-- 선택되어있는 메뉴탭 -->
-        
         <li><a href="boardMain.do">게시판</a></li>
         <li><a href="#">Page 1</a></li>
       </ul>
@@ -31,6 +30,12 @@
             <li><a href="memUpdateForm.do"><span class="glyphicon glyphicon-pencil"></span> &nbsp;회원정보수정</a></li>
             <li><a href="${contextPath}/memImageForm.do"><span class="glyphicon glyphicon-picture"></span> &nbsp;사진 등록</a></li>
             <li><a href="${contextPath}/memLogout.do"><span class="glyphicon glyphicon-log-out"></span> &nbsp;로그아웃</a></li>
+            <c:if test="${mvo.memProfile eq ''}">
+	  	  	<li><img class="img-circle" src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/></li>
+	      	</c:if>
+	      	<c:if test="${mvo.memProfile ne ''}">
+	  	  	<li><img class="img-circle" src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/></li>
+	      	</c:if>
       </ul>
       </c:if> 
     </div>

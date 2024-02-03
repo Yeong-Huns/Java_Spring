@@ -17,13 +17,13 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	//this = root-context.xml
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new class[] {}; //RootConfig.class
+		return new Class[] {RootConfig.class}; //RootConfig.class //여기 대문자 조심
 	}
 	
 	//this = servlet-context.xml
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new class[] {}; // ServletConfig.class
+		return new Class[] {ServletConfig.class}; // ServletConfig.class
 	}
 	
 	@Override

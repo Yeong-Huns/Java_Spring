@@ -17,7 +17,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	//this = root-context.xml
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {RootConfig.class}; //RootConfig.class //여기 대문자 조심
+		return new Class[] {RootConfig.class, SecurityConfig.class}; //RootConfig.class //여기 대문자 조심
 	}
 	
 	//this = servlet-context.xml

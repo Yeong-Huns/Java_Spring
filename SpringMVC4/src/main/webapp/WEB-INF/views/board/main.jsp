@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +13,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
+  	
+  	var csrfHeaderName = "${_csrf.headerName}";
+  	var csrfTokenValue = "${_csrf.token}";
+  	
   	$(document).ready(function(){
   		loadList();
+  		console.log("headerName"+csrfHeaderName);
+  		console.log("csrfTokenValue"+csrfTokenValue);
   	});
   	function loadList(){
   		$.ajax({
@@ -83,6 +90,9 @@
   				type: "put",
   				data: {"idx": idx},
   				dataType: "json",
+  				beforeSend: function(xhr){
+  	  				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+  	  			},
   				success: function(data){
   					$("#cnt"+idx).text(data.readCount)
   				},
@@ -118,6 +128,9 @@
   			url: "board/new",
   			type: "post",
   			data: fData,
+  			beforeSend: function(xhr){
+	  				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+	  			},
   			success: loadList,
   			error: function(){ alert("글 작성 에러!"); }
   		});
@@ -128,6 +141,9 @@
   			url: "board/"+idx,
   			type: "delete",
   			data: {"idx": idx},
+  			beforeSend: function(xhr){
+  				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+  			},
   			success: loadList,
   			error: function(){ alert("Delete 에러!"); }
   		});
@@ -151,6 +167,9 @@
   			type: "put",
   			contentType: 'application/json;charset=utf-8',
   			data: JSON.stringify({'idx': idx, 'title': title, 'content': content}),
+  			beforeSend: function(xhr){
+  				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+  			},
   			success: loadList,
   			error: function(){alert("글 수정 오류!!")}
   		});

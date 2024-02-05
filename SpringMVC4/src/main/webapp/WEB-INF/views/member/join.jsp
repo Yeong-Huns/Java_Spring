@@ -116,6 +116,7 @@
     				</td>
     			</tr>
     		</table>
+    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     	</form>
     </div>
     <!-- 다이얼 로그 창(모달) -->

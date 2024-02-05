@@ -131,7 +131,8 @@ public class MemberController {
 					rdAb.addFlashAttribute("msgType", "수정완료");
 					rdAb.addFlashAttribute("msg", "회원정보수정이 완료되었습다");
 					//회원가입이 성공하면 로그인 처리
-					session.setAttribute("mvo", m); // ${!empty m} == 로그인 
+					Member mvo = mapper.getMember(m.getMemId());
+					session.setAttribute("mvo", mvo); // ${!empty m} == 로그인 
 					return "redirect:/";
 				}else {
 					rdAb.addFlashAttribute("msgType", "오류!");

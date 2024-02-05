@@ -1,5 +1,6 @@
 package kr.blog.mapper;
 
+import kr.blog.entity.AuthVO;
 import kr.blog.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +14,7 @@ public interface MemberMapper {
 	public int memUpdate(Member m);
 	public Member getMember(String memId);
 	public void memProfileUpdate(Member mvo);
-	 // 로그인 체크
+
+	void authInsert(AuthVO saveVo);
+	// 로그인 체크
 }

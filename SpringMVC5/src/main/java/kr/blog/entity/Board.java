@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 	public class Board {
-	private int idx; //��ȣ
-	private String title; //����
- 	private String content; //����
-	private String writer; //�ۼ���
-	private String indate; //�ۼ���
-	private int readCount; //��ȸ��
+	private int idx; //번호
+	private String memId;
+	private String title; //제목
+ 	private String content; //내용
+	private String writer; //작성자
+	private String indate; //작성일
+	private int readCount; //조회수
 }

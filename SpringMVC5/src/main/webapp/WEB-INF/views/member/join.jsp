@@ -109,16 +109,23 @@
     				<td style="width:110px; vertical-align:middle">이메일</td>
     				<td colspan="2"><input id="memEmail" name="memEmail" type="email" class="form-control" maxlength="20" placeholder="이메일을 입력하세요."/></td>
     			</tr>
+				<!--권한 설정해보기(체크박스)-->
+				<tr>
+					<td style="width:110px; vertical-align:middle">사용자 권한</td>
+					<td colspan="2">
+						<input type="checkbox" name="authList[0].auth" value="ROLE_USER"> ROLE_USER
+						<input type="checkbox" name="authList[1].auth" value="ROLE_MANAGER"> ROLE_MANAGER
+						<input type="checkbox" name="authList[2].auth" value="ROLE_ADMIN"> ROLE_ADMIN
+					</td>
+				</tr>
     			<tr>
     				<td colspan="3" style="text-align:left">
     				<span id="PwdMessage" style="color: red" ></span>
     				<input type="button" class="btn btn-primary btn-sm pull-right" value="등록" onclick="goInsert()">
     				</td>
     			</tr>
-    		</table>s
+    		</table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			//_csrf.parameterName : spring header
-			//_csrf.token : spring token
     	</form>
     </div>
     <!-- 다이얼 로그 창(모달) -->

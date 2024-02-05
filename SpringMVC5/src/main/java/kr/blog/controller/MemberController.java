@@ -2,13 +2,16 @@ package kr.blog.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import kr.blog.entity.AuthVO;
 import kr.blog.entity.Member;
 import kr.blog.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +27,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberMapper mapper;
-	
+	@Autowired
+	PasswordEncoder PwdEnc;
 	@RequestMapping("/memJoin.do")
 	public String memJoin() {
 		return "member/join";
@@ -43,7 +47,7 @@ public class MemberController {
 		   memPwd1==null || memPwd1.equals("") ||
 		   memPwd2==null || memPwd2.equals("") ||
 		   m.getMemName()==null || m.getMemName().equals("") ||
-		   m.getMemAge()==0 ||
+		   m.getMemAge()==0 || m.getAuthList().size()==0 ||
 		   m.getMemGender()==null || m.getMemGender().equals("") ||
 		   m.getMemEmail()==null || m.getMemEmail().equals("")) {
 			// redirect시 객체 바인딩을 하는 방법? RedirectAttributes
@@ -58,12 +62,28 @@ public class MemberController {
 		}
 		m.setMemProfile(""); // 사진이 없는 상태(default)값을 ""로 지정 / 설정하지 않으면 null 값이 들어감
 		//회원을 테이블에 저장
+		// 추가 : 비밀번호를 암호화 하기(API)
+		String EncPwd = PwdEnc.encode(m.getMemPwd());
+		m.setMemPwd(EncPwd);
+		//register
 		int result = mapper.register(m); 
 		if(result==1) { //회원가입 성공 메세지
+			//권한 테이블에 회원의 권한을 저장하기
+			List<AuthVO>list = m.getAuthList();
+			for(AuthVO authVO : list){
+				if(authVO.getAuth()!=null){
+					AuthVO saveVo= new AuthVO(); // 이름&권한 설정을 위한 새로운 Auth 생성
+					saveVo.setMemId(m.getMemId()); //
+					saveVo.setAuth(authVO.getAuth());
+					mapper.authInsert(saveVo);
+				}
+			}
 			rdAb.addFlashAttribute("msgType", "회원가입 성공!");
 			rdAb.addFlashAttribute("msg", "가입되셨습니다.");
 			//회원가입이 성공하면 로그인 처리
-			session.setAttribute("mvo", m); /// ${!empty m} == 로그인
+			Member mvo = mapper.getMember(m.getMemId());
+			System.out.println(mvo);
+			session.setAttribute("mvo", mvo); /// ${!empty m} == 로그인
 			return "redirect:/";
 		}else {
 			rdAb.addFlashAttribute("msgType", "실패 메세지");

@@ -37,7 +37,7 @@ public class RootConfig {
 		hikariConfig.setJdbcUrl(env.getProperty("jdbc:mysql://localhost:3306/Spring_MVC01?serverTimezone=UTC"));
 		hikariConfig.setUsername(env.getProperty("root"));
 		hikariConfig.setPassword(env.getProperty("root"));
-		이런식으로 하면되는거같음 ㅇㅇ..
+		이런식으로 하면되는거같음 ㅇㅇ
 		 * */
 		HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
 		return hikariDataSource;

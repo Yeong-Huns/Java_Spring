@@ -14,9 +14,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-	  if(${!empty msgType}){
-		  $("#messageType").attr("class", "modal-content panel-warning");			  
-		  $("#myMessage").modal("show")
+	  if(${param.error!=null}){
+		  $("#messageType").attr("class", "modal-content panel-warning");
+		  $(".modal-body").text("아이디와 비밀번호를 다시확인해주세요!!!");
+		  $(".modal-header").text("로그인 실패"); //우리가 값을 설정해서 넘겨줘야한다.
+		  $("#myMessage").modal("show");
 	  }
   });
   </script>
@@ -33,11 +35,11 @@
     		<table class="table table-bordered" style="text-align: center; border: 1px solid #dddddd;">
     			<tr>
     				<td style="width:110px; vertical-align:middle">아이디</td>
-    				<td colspan="2"><input id="memId" name="memId" type="text" class="form-control" maxlength="20" placeholder="아이디를 입력하세요."/></td>
+    				<td colspan="2"><input id="memId" name="username" type="text" class="form-control" maxlength="20" placeholder="아이디를 입력하세요."/></td>
     			</tr>
     			<tr>
     				<td style="width:110px; vertical-align:middle">비밀번호</td>
-    				<td colspan="2"><input id="memPwd" name="memPwd" type="password" class="form-control" maxlength="20" placeholder="비밀번호를 입력하세요."/></td>
+    				<td colspan="2"><input id="memPwd" name="password" type="password" class="form-control" maxlength="20" placeholder="비밀번호를 입력하세요."/></td>
     			</tr>
     			<tr>
     				<td colspan="3" style="text-align:left">

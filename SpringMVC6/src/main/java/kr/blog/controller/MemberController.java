@@ -92,16 +92,17 @@ public class MemberController {
 			return "redirect:/memJoin.do";
 		}
 	}
+	/*
 	@RequestMapping("/memLogout.do")
 	public String memLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
-	}
+	}*/
 	@RequestMapping("/memLoginForm.do")
 	public String memLoginForm() {
 		return "member/memLoginForm";
 	}
-	
+	/*
 	@RequestMapping("/memLogin.do")
 	public String memLogin(Member m, HttpSession session, RedirectAttributes rdAb) {
 		if(m.getMemId()==null || m.getMemId().equals("") ||
@@ -123,7 +124,7 @@ public class MemberController {
 			rdAb.addFlashAttribute("msg", "다시 로그인 해주세요.");
 			return "redirect:/memLoginForm.do";
 			}
-		}
+		}*/
 	@RequestMapping("/memUpdateForm.do")
 	public String memUpdateForm() {
 		return "member/memUpdateForm";

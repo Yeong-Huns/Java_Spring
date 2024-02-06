@@ -110,7 +110,8 @@ public class MemberController {
 			return "redirect:/memLoginForm.do";
 		}
 		Member mvo = mapper.memLogin(m);
-			if(mvo!= null) { // 로그인에 성공
+		//추가 비밀번호 일치여부 체크
+			if(mvo!=null && PwdEnc.matches(m.getMemPwd(), mvo.getMemPwd())) { // 로그인에 성공
 			rdAb.addFlashAttribute("msgType", "로그인 성공");
 			rdAb.addFlashAttribute("msg", "로그인에 성공하셨습니다.");
 			session.setAttribute("mvo", mvo); //${!emepy mvo}
@@ -146,8 +147,23 @@ public class MemberController {
 					rdAb.addFlashAttribute("msg", "비밀번호가 서로 다릅니다.");
 					return "redirect:/memUpdateForm.do"; // ${msgType}, ${msg}
 				}
+				String enc = PwdEnc.encode(m.getMemPwd());
+				m.setMemPwd(enc);
 				int result = mapper.memUpdate(m); 
 				if(result==1) { //회원가입 성공 메세지
+					//기존 권한 삭제
+					mapper.authDelete(m.getMemId());
+					// 새로운 권한을 추가하기
+					List<AuthVO> list=m.getAuthList();
+					for(AuthVO authVO : list) {
+						if(authVO.getAuth()!=null) {
+							AuthVO saveVO=new AuthVO();
+							saveVO.setMemId(m.getMemId());
+							saveVO.setAuth(authVO.getAuth());
+							mapper.authInsert(saveVO);
+						}
+					}
+
 					rdAb.addFlashAttribute("msgType", "수정완료");
 					rdAb.addFlashAttribute("msg", "회원정보수정이 완료되었습니다.");
 					//회원가입이 성공하면 로그인 처리

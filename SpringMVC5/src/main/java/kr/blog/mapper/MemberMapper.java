@@ -14,7 +14,7 @@ public interface MemberMapper {
 	public int memUpdate(Member m);
 	public Member getMember(String memId);
 	public void memProfileUpdate(Member mvo);
-
+	public void authDelete(String memId);
 	void authInsert(AuthVO saveVo);
 	// 로그인 체크
 }

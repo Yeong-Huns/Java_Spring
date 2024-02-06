@@ -12,8 +12,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-	  const header = "${_csrf.headerName}";
-	  const token = "${_csrf.token}";
+	  var header = "${_csrf.headerName}";
+	  var token = "${_csrf.token}";
   	$(document).ready(function(){
   		loadList();
   	});
@@ -85,8 +85,8 @@
   				type: "put",
   				data: {"idx": idx},
   				dataType: "json",
-				beforeSend: function (hr){
-					  hr.setRequestHeader(header,token);
+				beforeSend: function (xhr){
+					  xhr.setRequestHeader(header,token);
 				},
   				success: function(data){
   					$("#cnt"+idx).text(data.readCount)
@@ -119,12 +119,13 @@
   	}
   	function goInsert(){
   		var fData = $("#frm").serialize();
+		  console.log(fData)
   		$.ajax({
   			url: "board/new",
   			type: "post",
   			data: fData,
-			beforeSend:function (x){
-				  x.setRequestHeader(header, token)
+			beforeSend:function (xhr){
+				  xhr.setRequestHeader(header, token)
 			},
   			success: loadList,
   			error: function(){ alert("글 작성 에러!"); }
@@ -136,8 +137,8 @@
   			url: "board/"+idx,
   			type: "delete",
   			data: {"idx": idx},
-			beforeSend:function (x){
-				  x.setRequestHeader(header, token)
+			beforeSend:function (xhr){
+				  xhr.setRequestHeader(header, token)
 			},
   			success: loadList,
   			error: function(){ alert("Delete 에러!"); }
@@ -162,8 +163,8 @@
   			type: "put",
   			contentType: 'application/json;charset=utf-8',
   			data: JSON.stringify({'idx': idx, 'title': title, 'content': content}),
-			beforeSend:function (x){
-				  x.setRequestHeader(header,token)
+			beforeSend:function (xhr){
+				  xhr.setRequestHeader(header,token)
 			},
   			success: loadList,
   			error: function(){alert("글 수정 오류!!")}
@@ -180,6 +181,7 @@
     <div class="panel-body" id="views"></div>
     <div class="panel-body" id="wform" style="display:none">
     <form id="frm">
+		<input type="hidden" name="memId" id="memId" value="${mvo.memId}"/>
     	<table class="table">
     		<tr>
     			<td>제목</td>

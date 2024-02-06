@@ -29,7 +29,7 @@ public class BoardRestController {
 		}
 		@PostMapping("/new")
 		public void boardInsert(Board vo) { 
-			mapper.boardInsert(vo); //���
+			mapper.boardInsert(vo);
 		}
 		@DeleteMapping("/{idx}")
 		public void boadDelete(@PathVariable("idx") int idx) {

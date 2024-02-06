@@ -29,8 +29,9 @@
 		VALUES((select IFNULL(MAX(memIdx)+1,1) from Member mem),
 		#{memId}, #{memPwd}, #{memName}, #{memAge}, #{memGender}, #{memEmail}, #{memProfile});
 	</insert>
-	<select id="memLogin" parameterType="kr.blog.entity.Member" resultType="kr.blog.entity.Member">
-		select * from Member where memId=#{memId} and memPwd=#{memPwd}
+	<select id="memLogin" parameterType="kr.blog.entity.Member" resultMap="memberMap">
+		select * from Member LEFT OUTER JOIN MemberAuth
+		on Member.memId=MemberAuth.memId WHERE Member.memId=#{memId}
 	</select>
 	<update id="memUpdate" parameterType="kr.blog.entity.Member">
 		UPDATE MEMBER SET memPwd=#{memPwd}, memName=#{memName}, memAge=#{memAge}, memGender=#{memGender}, 
@@ -48,4 +49,8 @@
 	<insert id="authInsert" parameterType="kr.blog.entity.AuthVO">
 		INSERT INTO MemberAuth(memId, auth) values (#{memId}, #{auth})
 	</insert>
+
+	<delete id="authDelete">
+		delete from MemberAuth WHERE memId=#{memId}
+	</delete>
 </mapper>

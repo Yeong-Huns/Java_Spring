@@ -27,18 +27,24 @@
       </c:if> 
        <c:if test="${!empty mvo}">
       <ul class="nav navbar-nav navbar-right"> <!-- 오른쪽 정렬될 탭 -->
-            <li><a href="memUpdateForm.do"><span class="glyphicon glyphicon-pencil"></span> &nbsp;회원정보수정</a></li>
+           <li><a href="memUpdateForm.do"><span class="glyphicon glyphicon-pencil"></span> &nbsp;회원정보수정</a></li>
             <li><a href="${contextPath}/memImageForm.do"><span class="glyphicon glyphicon-picture"></span> &nbsp;사진 등록</a></li>
             <li><a href="${contextPath}/memLogout.do"><span class="glyphicon glyphicon-log-out"></span> &nbsp;로그아웃</a></li>
-            <c:if test="${empty mvo.memProfile}">
+           <c:if test="${empty mvo.memProfile}">
 	  	  	<li><img class="img-circle" src="${contextPath}/resources/images/person.png" style="width: 50px;heigth:50px"/></li>
 	      	</c:if>
 	      	<c:if test="${!empty mvo.memProfile}">
 	  	  	<li><img class="img-circle" src="${contextPath}/resources/upload/${mvo.memProfile}" style="width: 50px; heigth: 50px"/></li>
 	      	</c:if>
+          (
+          <c:forEach items="${mvo.authList}" var="authVo">
+              <c:if test="${authVo.auth eq 'ROLE_USER'}">U</c:if>
+              <c:if test="${authVo.auth eq 'ROLE_MANAGER'}">M</c:if>
+              <c:if test="${authVo.auth eq 'ROLE_ADMIN'}">A</c:if>
+          </c:forEach>
+          )
       </ul>
       </c:if> 
     </div>
   </div>
 </nav>
-  

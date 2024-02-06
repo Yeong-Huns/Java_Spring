@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.blog.mapper.MemberMapper">
+
+	<resultMap id="memberMap" type="kr.blog.entity.Member">
+		<id property="memIdx" column="memIdx"/>
+		<result property="memId" column="memId"/>
+		<result property="memPwd" column="memPwd"/>
+		<result property="memName" column="memName"/>
+		<result property="memAge" column="memAge"/>
+		<result property="memGender" column="memGender"/>
+		<result property="memEmail" column="memEmail"/>
+		<result property="memProfile" column="memProfile"/>
+		<collection property="authList" resultMap="authMap"/>
+	</resultMap>
+	<resultMap id="authMap" type="kr.blog.entity.AuthVO">
+		<id property="no" column="no"/>
+		<result property="memId" column="memId"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
+
+	<select id="registerCheck" resultType="kr.blog.entity.Member">
+		select * from Member WHERE memId=#{memId}
+	</select>
+	<insert id="register" parameterType="kr.blog.entity.Member">
+		INSERT INTO 
+		member(memIdx, memId, memPwd, memName, memAge, memGender, memEmail, memProfile)
+		VALUES((select IFNULL(MAX(memIdx)+1,1) from Member mem),
+		#{memId}, #{memPwd}, #{memName}, #{memAge}, #{memGender}, #{memEmail}, #{memProfile});
+	</insert>
+	<select id="memLogin" parameterType="kr.blog.entity.Member" resultMap="memberMap">
+		select * from Member LEFT OUTER JOIN MemberAuth
+		on Member.memId=MemberAuth.memId WHERE Member.memId=#{memId}
+	</select>
+	<update id="memUpdate" parameterType="kr.blog.entity.Member">
+		UPDATE MEMBER SET memPwd=#{memPwd}, memName=#{memName}, memAge=#{memAge}, memGender=#{memGender}, 
+		memEmail=#{memEmail} WHERE memId=#{memId}
+	</update>
+	<!--회원정보 ,권한 join 연산-->
+	<select id="getMember" resultMap="memberMap">
+		select * From Member mem LEFT OUTER JOIN MemberAuth auth on
+			mem.memId=auth.memId WHERE mem.memId=#{memId};
+	</select>
+	<update id="memProfileUpdate" parameterType="kr.blog.entity.Member">
+		update Member set memProfile=#{memProfile} where memId=#{memId}
+	</update>
+	
+	<insert id="authInsert" parameterType="kr.blog.entity.AuthVO">
+		INSERT INTO MemberAuth(memId, auth) values (#{memId}, #{auth})
+	</insert>
+
+	<delete id="authDelete">
+		delete from MemberAuth WHERE memId=#{memId}
+	</delete>
+</mapper>

@@ -40,7 +40,7 @@
 	<!--회원정보 ,권한 join 연산-->
 	<select id="getMember" resultMap="memberMap">
 		select * From Member mem LEFT OUTER JOIN MemberAuth auth on
-			mem.memId=auth.memId WHERE mem.memId=#{memId};
+			mem.memId=auth.memId WHERE mem.memId=#{username};
 	</select>
 	<update id="memProfileUpdate" parameterType="kr.blog.entity.Member">
 		update Member set memProfile=#{memProfile} where memId=#{memId}

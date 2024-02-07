@@ -26,7 +26,7 @@
 	<insert id="register" parameterType="kr.blog.entity.Member">
 		INSERT INTO 
 		member(memIdx, memId, memPwd, memName, memAge, memGender, memEmail, memProfile)
-		VALUES((select IFNULL(MAX(memIdx)+1,1) from Member mem),
+2		VALUES((select IFNULL(MAX(memIdx)+1,1) from Member mem),
 		#{memId}, #{memPwd}, #{memName}, #{memAge}, #{memGender}, #{memEmail}, #{memProfile});
 	</insert>
 	<select id="memLogin" parameterType="kr.blog.entity.Member" resultMap="memberMap">

@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="mvo" value="${SPRING_SECURITY_CONTEXT.authentication.principal}"/>
+<c:set var="auth" value="${SPRING_SECURITY_CONTEXT.authentication.authorities}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,11 +33,11 @@
     <div class="panel-heading">회원사진등록</div>
     <div class="panel-body">
     	<form method="post" action="${contextPath}/memImageUpdate.do?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
-    	<input type="hidden" name="memId" value="${mvo.memId}"/>
+    	<input type="hidden" name="memId" value="${mvo.member.memId}"/>
     		<table class="table table-bordered" style="text-align: center; border: 1px solid #dddddd;">
     			<tr>
     				<td style="width:110px; vertical-align:middle">아이디</td>
-    				<td colspan="2">${mvo.memId}</td>
+    				<td colspan="2">${mvo.member.memId}</td>
     			</tr>
     			<tr>
     				<td style="width:110px; vertical-align:middle">사진업로드</td>
